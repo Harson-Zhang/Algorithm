@@ -11,7 +11,7 @@ public class MergeSort {
 	//marge实现归并的递归运算
 	public static void merge(int[] A, int L1, int R1, int L2, int R2){
 		int i = L1, j = L2;
-		int[] temp = new int[LENGTH];
+		int[] temp = new int[LENGTH];	//空间复杂度O(n)？
 		int index = 0;	//temp数组的下标
 		
 		while(i<=R1 && j<=R2){
@@ -38,9 +38,9 @@ public class MergeSort {
 	public static void mergeSort(int[] A, int left, int right){
 		if(left<right){		//思考：用while还是if？
 			int middle = (left + right)/2;
-			mergeSort(A, left, middle);
+			mergeSort(A, left, middle);			//可怕，递归式写在函数体的前面了，先分割后操作。。和快排先操作后分割不一样那~
 			mergeSort(A, middle+1, right);
-			merge(A, left, middle, middle+1, right);
+			merge(A, left, middle, middle+1, right);	
 		}
 	}
 	

@@ -5,13 +5,29 @@ import java.util.Random;
 public class QuickSort {
 	public static final int LENGTH = 100;	//数组长度为100
 	public static void quickSort(int[] A, int left, int right){
-		int i = left, j =right;
 		
-		if(i<j){
-			 
+		if (left < right) {		//没有if，递归回无法终止
+			int i = left, j =right;
+			int temp = A[i];	//temp为枢轴，将数组第一个数设为枢轴
+			
+			while (i < j) {		//i和j未汇合以前，执行以下操作
+				while (i < j && A[j] >= temp)	j--;		//j寻找小数字
+				if (i < j) {	//找到小数字后换前面去
+					A[i] = A[j];
+					i++;
+				}
+
+				while (i < j && A[i] < temp)	i++;		//i寻找大数字
+				if (i < j) {	//找到大数字后换后面去
+					A[j] = A[i];
+					j--;
+				}
+			}
+			A[i] = temp;		//i、j已汇合，是时候将枢轴归位了
+			quickSort(A, left, i-1);		//递归，i左边执行以上操作
+			quickSort(A, i+1, right);		//递归，i右边执行以上操作
 		}
 	}
-	
 	
 	public static void main(String[] args) {
 		int[] array = new int[LENGTH];
